@@ -1,6 +1,6 @@
 <?php
 
-namespace BibliotecaModel;
+
 
 abstract class AbstractEntity {
     protected $_values = array();
@@ -16,7 +16,7 @@ abstract class AbstractEntity {
     public function __set($name, $value)
     {
         if (!in_array($name, $this->_allowedFields)) {
-            throw new InvalidArgumentException("Setting the field ‘$name’ is not allowed for this entity."); 
+            throw new InvalidArgumentException("Setting the field '$name' is not allowed for this entity."); 
         }
         $mutator = ‘set’ . ucfirst($name);
         if (method_exists($this, $mutator) && is_callable(array($this, $mutator))) {

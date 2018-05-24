@@ -1,7 +1,5 @@
 <?php
-namespace BibliotecaDatabase;
-include_once dirname(__FILE__) . '/credentials.php';
-
+include_once dirname(__FILE__) . '/DatabaseAdapterInterface.php';
 class MysqlAdapter implements DatabaseAdapterInterface{
     protected $_config = array();
     protected $_link;

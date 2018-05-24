@@ -1,6 +1,6 @@
 <?php
 
-namespace BibliotecaDatabase;
+
 
 interface DatabaseAdapterInterface{
     function connect();

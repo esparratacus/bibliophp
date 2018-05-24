@@ -1,14 +1,15 @@
 <?php
 
-namespace BibliotecaModelMapper;
-use BibliotecaDatabase;
+include_once dirname(__FILE__) . '/MapperInterface.php';
+include_once dirname(__FILE__) . '../../Database/MysqlAdapter.php';
 
 abstract class AbstractMapper implements MapperInterface{
     protected $_adapter;
     protected $_entityTable;
     protected $_entityClass;
 
-    public function __construct(DatabaseDatabaseAdapterInterface $adapter, array $entityOptions = array())
+    
+    public function __construct(DatabaseAdapterInterface $adapter, array $entityOptions = array())
     {
         $this->_adapter = $adapter;
         // set the entity table is the option has been specified
@@ -68,7 +69,7 @@ abstract class AbstractMapper implements MapperInterface{
 
     public function findById($id)
     {
-        $this->_adapter->select($this->_entityTable, "id = $id");
+        $this->_adapter->select($this->_entityTable, "id =". $id);
         if ($data = $this->_adapter->fetch()) {
             return $this->_createEntity($data);
         }
