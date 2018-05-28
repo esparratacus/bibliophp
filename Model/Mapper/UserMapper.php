@@ -1,7 +1,7 @@
 <?php
 
-use BibliotecaDatabase, BibliotecaModel;
 include_once dirname(__FILE__) . '../User.php';
+
 
 class UserMapper extends AbstractMapper {
     protected $_entityTable = ‘Users’;
