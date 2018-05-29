@@ -7,7 +7,7 @@ $con= new MysqlAdapter(array(DB_HOST, DB_USER,DB_PASSWORD,DB_NAME));
 $con->query("CREATE TABLE User(Id INT NOT NULL AUTO_INCREMENT,PRIMARY KEY(Id),FullName char(60),Email char(60),Password char(12),is_admin INT)");
 $con->query("
 CREATE TABLE `biblioteca`.`books` (
-    `id` INT NOT NULL,
+    `id` INT NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(45) NOT NULL,
     `author` VARCHAR(45) NOT NULL,
     `edition` VARCHAR(45) NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE `biblioteca`.`books` (
 
 $con->query("
 CREATE TABLE `biblioteca`.`equipment` (
-    `id` INT NOT NULL,
+    `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(45) NOT NULL,
     `maker` VARCHAR(45) NOT NULL,
     `serial_number` VARCHAR(45) NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE `biblioteca`.`equipment` (
 
 $con->query("
 CREATE TABLE `biblioteca`.`events` (
-    `id` INT NOT NULL,
+    `id` INT NOT NULL AUTO_INCREMENT,
     `starts_at` DATETIME NOT NULL,
     `ends_at` DATETIME NOT NULL,
     `location` VARCHAR(45) NOT NULL,
@@ -38,14 +38,14 @@ CREATE TABLE `biblioteca`.`events` (
 
 $con->query("
 CREATE TABLE `biblioteca`.`rooms` (
-    `id` INT NOT NULL,
+    `id` INT NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`id`));
 ");
 
 $con->query("
 CREATE TABLE `biblioteca`.`reservations` (
-    `id` INT NOT NULL,
+    `id` INT NOT NULL AUTO_INCREMENT,
     `user_id` INT NULL,
     `room_id` INT NULL,
     `reservation_starts` DATETIME NULL,
@@ -69,7 +69,7 @@ ADD CONSTRAINT `fk_room`
 
 $con->query("
 CREATE TABLE `biblioteca`.`reports` (
-    `id` INT NOT NULL,
+    `id` INT NOT NULL AUTO_INCREMENT,
     `state` VARCHAR(45) NOT NULL,
     `comments` VARCHAR(512) NULL,
     `equipment_id` INT NULL,
