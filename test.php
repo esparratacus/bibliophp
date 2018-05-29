@@ -14,6 +14,8 @@ CREATE TABLE `biblioteca`.`users` (
     PRIMARY KEY (`id`));
 ");
 
+$con->query("INSERT INTO users (username, email, password, is_admin) VALUES ('admin', 'admin@mail.com', '$2y$10$5Ov45Ce.Dq2PPd1APHjg3uLoMdTrhbHCmVPwYKGpRC/YfeZdZZX8O', 1);");
+
 $con->query("
 CREATE TABLE `biblioteca`.`books` (
     `id` INT NOT NULL AUTO_INCREMENT,
@@ -53,6 +55,9 @@ CREATE TABLE `biblioteca`.`rooms` (
 ");
 
 $con->query("INSERT INTO rooms (name) VALUES ('sala_a');");
+$con->query("INSERT INTO rooms (name) VALUES ('sala_b');");
+$con->query("INSERT INTO rooms (name) VALUES ('sala_c');");
+$con->query("INSERT INTO rooms (name) VALUES ('sala_d');");
 
 $con->query("
 CREATE TABLE `biblioteca`.`reservations` (

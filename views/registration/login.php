@@ -7,7 +7,21 @@
   $um = new UserMapper($con);
 
   if(isset($_POST['inputEmail'])){
-    echo $um->find("Email='" . $_POST['inputEmail'] . "'");
+    $fetch_result = $um->find("Email='" . $_POST['inputEmail'] . "'")->toArray();
+    if(empty($fetch_result)){ // Invalid email
+      echo "Correo o contraseña inválidos"; // Fix
+    } else {
+      $user = $fetch_result[0];
+      if(password_verify($_POST['inputPassword'], $user->password)){
+        session_start();
+        $_SESSION['current_user'] = $user;
+        echo "Ok!"; // Fix
+        
+        // TODO Redirect
+      } else {
+        echo "Correo o contraseña inválidos"; // Fix
+      }
+    }
   }
 ?>
 
