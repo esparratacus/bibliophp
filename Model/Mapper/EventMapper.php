@@ -26,9 +26,9 @@ class EventMapper extends AbstractMapper {
     protected function _createEntity(array $fields)
     {
         return new Event(array(
-            ‘id’       => $fields[‘id’],
-            ‘name’    => $fields[‘title’],
-            ‘event_start’  => $fields[‘event_start’]
+            'id'       => $fields['id'],
+            'name'    => $fields['title'],
+            'event_start'  => $fields['event_start']
         ));
     }    
 }

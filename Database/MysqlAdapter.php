@@ -39,7 +39,7 @@ class MysqlAdapter implements DatabaseAdapterInterface{
         return $this->_result;
     }
 
-    public function select($table, $where , $fields='*', $order, $limit = null, $offset = null)
+    public function select($table, $where , $fields='*', $order = null, $limit = null, $offset = null)
     {
         $query = 'SELECT ' . $fields . ' FROM ' . $table
                . (($where) ? ' WHERE ' . $where : "" )
@@ -84,10 +84,10 @@ class MysqlAdapter implements DatabaseAdapterInterface{
     {
         $this->connect();
         if ($value === null) {
-            $value = ‘NULL’;
+            $value = 'NULL';
         }
         else if (!is_numeric($value)) {
-            $value = "’" . mysqli_real_escape_string($this->_link, $value) . "’";
+            $value = "'" . mysqli_real_escape_string($this->_link, $value) . "'";
         }
         return $value;
     }
