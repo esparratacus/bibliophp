@@ -34,6 +34,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Libros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/biblioteca/views/inventory/index.php">Inventario</a>
           </li> 
         </ul>
       </div>

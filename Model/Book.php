@@ -47,7 +47,7 @@ class Book extends AbstractEntity {
 
     public function setCopies($copies)
     {
-        if (!is_string($copies) || strlen($copies) < 2 || strlen($copies) > 64) {
+        if (!is_numeric($copies) || $copies < 0 ) {
             throw new InvalidArgumentException('The copies of the entry is invalid.');
         }
         $this->_values['copies'] = $copies;
