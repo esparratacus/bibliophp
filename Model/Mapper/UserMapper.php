@@ -11,9 +11,9 @@ class UserMapper extends AbstractMapper {
         parent::__construct($adapter);
     }
 
-    public function insert(Event $event)
+    public function insert(User $user)
     {
-        return $this->_adapter->insert($this->_entityTable, $entry->toArray());
+        return $this->_adapter->insert($this->_entityTable, $user->toArray());
     }
 
     public function delete($id)

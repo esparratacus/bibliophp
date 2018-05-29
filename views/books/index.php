@@ -1,11 +1,16 @@
 <?php
     include_once dirname(__FILE__) . '/../../Database/credentials.php';
     include_once dirname(__FILE__) . '/../../Database/MysqlAdapter.php';
+    include_once dirname(__FILE__) . '/../../Model/Mapper/BookMapper.php';
     $con= new MysqlAdapter(array(DB_HOST, DB_USER,DB_PASSWORD,DB_NAME));
     if($_POST['new_book']!=null )
     {
         $con->insert('books',$_POST['new_book']);
     }
+    $bm = new BookMapper($con);
+    $book= $bm->findById(1); // finds only one
+    $books= $bm->find(); // perferms a SELECT * from books with no condition
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,6 +54,7 @@
     </nav>
 
     <main role="main" class="container" style="margin-top: 60px;">
+        <div class="row">
         <div class="col-md-9">
         <table class="table">
         <thead>
@@ -63,12 +69,17 @@
             </tr>
         </thead>
         <tbody>
+            <?php foreach($books as $b):?>
             <tr>
-            <th scope="row">1</th>
-            <td><?php echo($_POST)?></td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <th scope="row"><?php echo $b->id ;?></th>
+            <td><?php echo $b->title; ?></td>
+            <td><?php echo $b->author; ?></td>
+            <td><?php echo $b->edition; ?></td>
+            <td><?php echo $b->publisher; ?></td>
+            <td><?php echo $b->isbn; ?></td>
+            <td><?php echo $b->copies; ?></td>
             </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
         </div>
@@ -101,6 +112,8 @@
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
         </div>
+        </div>
+        
     </main>
     <!-- Bootstrap core JavaScript
     ================================================== -->

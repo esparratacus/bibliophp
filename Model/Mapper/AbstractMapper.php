@@ -1,7 +1,8 @@
 <?php
 
 include_once dirname(__FILE__) . '/MapperInterface.php';
-include_once dirname(__FILE__) . '../../Database/MysqlAdapter.php';
+include_once dirname(__FILE__) . '/../../Database/MysqlAdapter.php';
+include_once dirname(__FILE__) . '/../EntityCollection.php';
 
 abstract class AbstractMapper implements MapperInterface{
     protected $_adapter;
@@ -13,12 +14,12 @@ abstract class AbstractMapper implements MapperInterface{
     {
         $this->_adapter = $adapter;
         // set the entity table is the option has been specified
-        if (isset($entityOptions[‘entityTable’])) {
-            $this->setEntityTable($entityOtions[‘entityTable’]);
+        if (isset($entityOptions['entityTable'])) {
+            $this->setEntityTable($entityOptions['entityTable']);
         }
         // set the entity class is the option has been specified
-        if (isset($entityOptions[‘entityClass’])) {
-            $this->setEntityClass($entityOtions[‘entityClass’]);
+        if (isset($entityOptions['entityClass'])) {
+            $this->setEntityClass($entityOptions['entityClass']);
         }
         // check the entity options
         $this->_checkEntityOptions();
@@ -78,7 +79,7 @@ abstract class AbstractMapper implements MapperInterface{
 
     public function find($conditions = '')
     {
-        $collection = new CollectionEntityCollection;
+        $collection = new EntityCollection;
         $this->_adapter->select($this->_entityTable, $conditions);
         while ($data = $this->_adapter->fetch()) {
             $collection[] = $this->_createEntity($data);
@@ -89,7 +90,7 @@ abstract class AbstractMapper implements MapperInterface{
     public function insert($entity)
     {
         if (!$entity instanceof $this->_entityClass) {
-            throw new InvalidArgumentException('The entity to be inserted must be an instance of ' . $this->_entityClass . ‘.’);
+            throw new InvalidArgumentException('The entity to be inserted must be an instance of ' . $this->_entityClass . '.');
         }
         return $this->_adapter->insert($this->_entityTable, $entity->toArray());
     }
@@ -97,15 +98,15 @@ abstract class AbstractMapper implements MapperInterface{
     public function update($entity)
     {
         if (!$entity instanceof $this->_entityClass) {
-            throw new InvalidArgumentException('The entity to be updated must be an instance of'  . $this->_entityClass . ‘.’);
+            throw new InvalidArgumentException('The entity to be updated must be an instance of'  . $this->_entityClass . '.');
         }
         $id = $entity->id;
         $data = $entity->toArray();
-        unset($data[‘id’]);
+        unset($data['id']);
         return $this->_adapter->update($this->_entityTable, $data, "id = $id");
     }
 
-    public function delete($id, $col = ‘id’)
+    public function delete($id, $col = 'id')
     {
         if ($id instanceof $this->_entityClass) {
             $id = $id->id;

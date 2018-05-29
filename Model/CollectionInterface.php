@@ -7,7 +7,7 @@ interface CollectionInterface extends Countable, IteratorAggregate, ArrayAccess
 
     public function reset();
 
-    public function add($key, ModelAbstractEntity $entity);
+    public function add($key, AbstractEntity $entity);
    
     public function get($key);
 

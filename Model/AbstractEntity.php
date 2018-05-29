@@ -18,7 +18,7 @@ abstract class AbstractEntity {
         if (!in_array($name, $this->_allowedFields)) {
             throw new InvalidArgumentException("Setting the field '$name' is not allowed for this entity."); 
         }
-        $mutator = ‘set’ . ucfirst($name);
+        $mutator = "set" . ucfirst($name);
         if (method_exists($this, $mutator) && is_callable(array($this, $mutator))) {
             $this->$mutator($value);          
         }
@@ -30,22 +30,22 @@ abstract class AbstractEntity {
     public function __get($name)
     {
         if (!in_array($name, $this->_allowedFields)) {
-            throw new InvalidArgumentException("Getting the field ‘$name’ is not allowed for this entity.");
+            throw new InvalidArgumentException("Getting the field '$name' is not allowed for this entity.");
         }
-        $accessor = ‘get’ . ucfirst($name);
+        $accessor = "get" . ucfirst($name);
         if (method_exists($this, $accessor) && is_callable(array($this, $accessor))) {
             return $this->$accessor;   
         }
         if (isset($this->_values[$name])) {
             return $this->_values[$name];  
         }
-        throw new InvalidArgumentException("The field ‘$name’ has not been set for this entity yet.");   
+        throw new InvalidArgumentException("The field '$name' has not been set for this entity yet.");   
     }
 
     public function __isset($name)
     {
         if (!in_array($name, $this->_allowedFields)) {
-            throw new InvalidArgumentException("The field ‘$name’ is not allowed for this entity.");
+            throw new InvalidArgumentException("The field '$name' is not allowed for this entity.");
         }
         return isset($this->_values[$name]);
     }
@@ -53,13 +53,13 @@ abstract class AbstractEntity {
     public function __unset($name)
     {
         if (!in_array($name, $this->_allowedFields)) {
-            throw new InvalidArgumentException("Unsetting the field ‘$name’ is not allowed for this entity.");
+            throw new InvalidArgumentException("Unsetting the field '$name' is not allowed for this entity.");
         }
         if (isset($this->_values[$name])) {
             unset($this->_values[$name]);
             return true;
         }
-        throw new InvalidArgumentException("The field ‘$name’ has not been set for this entity yet.");
+        throw new InvalidArgumentException("The field '$name' has not been set for this entity yet.");
     }
 
     public function toArray()

@@ -53,8 +53,9 @@ class MysqlAdapter implements DatabaseAdapterInterface{
     public function insert($table, array $data)
     {
         $fields = implode(',', array_keys($data));
+        $campos=str_replace("'"," ",$fields);
         $values = implode(',', array_map(array($this, 'quoteValue'), array_values($data)));
-        $query = 'INSERT INTO ' . $table . ' (' . $fields . ') ' . ' VALUES (' . $values . ')';
+        $query = 'INSERT INTO ' . $table . ' (' . $campos . ') ' . ' VALUES (' . $values . ')';
         $this->query($query);
         return $this->getInsertId();
     }

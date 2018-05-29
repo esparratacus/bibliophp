@@ -1,5 +1,5 @@
 <?php
-include_once dirname(__FILE__) . './CollectionInterface.php';
+include_once dirname(__FILE__) . '/CollectionInterface.php';
 class EntityCollection implements CollectionInterface
 {
     protected $_entities = array();
@@ -40,7 +40,7 @@ class EntityCollection implements CollectionInterface
     /**
      * Add an entity to the collection
      */
-    public function add($key, ModelAbstractEntity $entity) {
+    public function add($key, AbstractEntity $entity) {
         return $this->offsetSet($key, $entity);
     }
 
@@ -89,7 +89,7 @@ class EntityCollection implements CollectionInterface
      */
     public function offsetSet($key, $entity)
     {
-        if (!$entity instanceof ModelAbstractEntity) {
+        if (!$entity instanceof AbstractEntity) {
             throw new InvalidArgumentException('To add an entity to the collection, it must be an instance of EntityAbstract.');
         }
         if (!isset($key)) {
@@ -106,7 +106,7 @@ class EntityCollection implements CollectionInterface
      */
     public function offsetUnset($key)
     {
-        if ($key instanceof ModelAbstractEntity) {
+        if ($key instanceof AbstractEntity) {
             $this->_entities = array_filter($this->_entities, function ($v) use ($key) {
                 return $v !== $key;
             });
