@@ -10,6 +10,16 @@
   $room = $rm->findById(1);
   $reservations = $resMapper->find();
 
+  $calendarData = array();
+  foreach($reservations as $r):
+    $u = $r->user->load();
+    $s = $r->room->load();
+    array_push($calendarData,array('title'=>$s->name .":". $u->FullName,'start'=> $r->reservation_starts,'end'=>$r->reservation_ends,'allDay'=> false));
+  endforeach;
+   
+             
+             
+
   
 ?>
 
@@ -63,15 +73,7 @@ Esta pagina usa un calendario de bootstrap. La documentación se puede encontrar
     </nav>
 
     <main role="main" class="container" style="margin-top: 60px;">
-      <div>
-      <?php foreach($reservations as $r): ?>
-      <p><?php echo $r->reservation_starts; ?></p>
-      <p><?php echo $r->reservation_ends; ?></p>
-      <?php $user = $r->user; ?>
-      <p><?php echo $user->load()->Email; ?></p>
-      <?php endforeach;?>
-      </div>
-
+      
       <div id="calendar">
 
       </div>
@@ -85,7 +87,16 @@ Esta pagina usa un calendario de bootstrap. La documentación se puede encontrar
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 <script>
     $(function() {
-        $('#calendar').fullCalendar({weekends: false});
+        $('#calendar').fullCalendar({
+          weekends: false,
+          defaultView: 'agendaWeek',
+          header: {
+            left: 'month,agendaWeek,agendaDay'
+            },
+          events:
+            <?php echo json_encode($calendarData);?>
+          
+          });
     });
 </script>
 
