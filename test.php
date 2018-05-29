@@ -4,7 +4,16 @@ include_once dirname(__FILE__) . '/Database/credentials.php';
 include_once dirname(__FILE__) . '/Database/MysqlAdapter.php';
 
 $con= new MysqlAdapter(array(DB_HOST, DB_USER,DB_PASSWORD,DB_NAME));
-$con->query("CREATE TABLE User(Id INT NOT NULL AUTO_INCREMENT,PRIMARY KEY(Id),FullName char(60),Email char(60),Password char(100),is_admin INT)");
+$con->query("
+CREATE TABLE `biblioteca`.`users` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `username` VARCHAR(45) NOT NULL,
+    `email` VARCHAR(60) NOT NULL,
+    `password` VARCHAR(100) NOT NULL,
+    `is_admin` INT NOT NULL,
+    PRIMARY KEY (`id`));
+");
+
 $con->query("
 CREATE TABLE `biblioteca`.`books` (
     `id` INT NOT NULL AUTO_INCREMENT,
@@ -43,12 +52,7 @@ CREATE TABLE `biblioteca`.`rooms` (
     PRIMARY KEY (`id`));
 ");
 
-$con->query("
-INSERT INTO rooms (name) VALUES ('sala_a');
-INSERT INTO rooms (name) VALUES ('sala_b');
-INSERT INTO rooms (name) VALUES ('sala_c');
-INSERT INTO rooms (name) VALUES ('sala_d');
-");
+$con->query("INSERT INTO rooms (name) VALUES ('sala_a');");
 
 $con->query("
 CREATE TABLE `biblioteca`.`reservations` (
@@ -64,7 +68,7 @@ $con->query("
 ALTER TABLE `biblioteca`.`reservations` 
 ADD CONSTRAINT `fk_user`
   FOREIGN KEY (`user_id`)
-  REFERENCES `biblioteca`.`User` (`Id`)
+  REFERENCES `biblioteca`.`users` (`id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION,
 ADD CONSTRAINT `fk_room`
@@ -93,7 +97,7 @@ ADD CONSTRAINT `fk_equipment`
   ON UPDATE NO ACTION,
 ADD CONSTRAINT `fk_user_report`
   FOREIGN KEY (`user_id`)
-  REFERENCES `biblioteca`.`User` (`Id`)
+  REFERENCES `biblioteca`.`users` (`id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
 ");
