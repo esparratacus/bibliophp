@@ -76,7 +76,7 @@ abstract class AbstractMapper implements MapperInterface{
         return null;
     }
 
-    public function find($conditions = ”)
+    public function find($conditions = '')
     {
         $collection = new CollectionEntityCollection;
         $this->_adapter->select($this->_entityTable, $conditions);

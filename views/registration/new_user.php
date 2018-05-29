@@ -17,6 +17,13 @@
 
   <body>
 
+    <?php
+      include_once dirname(__FILE__) . '/../../Database/credentials.php';
+      include_once dirname(__FILE__) . '/../../Database/MysqlAdapter.php';
+
+      $con = new MysqlAdapter(array(DB_HOST, DB_USER,DB_PASSWORD,DB_NAME));
+    ?>
+
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" >
       
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
@@ -40,33 +47,52 @@
       </div>
     </nav>
 
+    <?php
+      if(isset($_POST['inputUsername'])){
+        
+        if($con->select("user", "Email='" . $_POST['inputEmail'] . "'") != 0){ //Email is already registered
+          echo "El correo ya se encuentra registrado"; // Fix
+        } else { // Register the new user
+          $con->insert("user", array(
+            'FullName'=>$_POST['inputUsername'],
+            'Email'=>$_POST['inputEmail'],
+            'Password'=>hash_password($_POST['inputPassword']),
+            'is_admin'=>0));
+        }
+      }
+
+      function hash_password($password){
+        return password_hash($password, PASSWORD_BCRYPT);
+      }
+    ?>
+
     <main role="main" class="container" style="margin-top: 60px;">
 
-      <form class="form-signin">
-      <h1 class="h3 mb-3 font-weight-normal">Nuevo usuario</h1>
-      <div class="form-group">
-        <label for="username" >Nombre de usuario</label>
-        <input type="text" id="inputUsername" class="form-control" placeholder="Nombre de usuario" required autofocus>
-      </div>
-     
-      <div class="form-group">
-        <label for="inputEmail" >Dirección de correo</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Correo" required autofocus>
-      </div>
-      
-      <div class="form-group">
-        <label for="inputEmailConfirmation" >Confirmar correo</label>
-        <input type="email" id="inputEmailConfirmation" class="form-control" placeholder="Confirmar correo" required autofocus>
-      </div>
+      <form class="form-signin" method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
+        <h1 class="h3 mb-3 font-weight-normal">Nuevo usuario</h1>
+        <div class="form-group">
+          <label for="inputUsername" >Nombre de usuario</label>
+          <input type="text" id="inputUsername" name="inputUsername" class="form-control" placeholder="Nombre de usuario" required autofocus>
+        </div>
 
-      <dif class="form-group">
-        <label for="inputPassword" >Contraseña</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
-      </dif>
-      
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
-    </form>
+        <div class="form-group">
+          <label for="inputEmail" >Dirección de correo</label>
+          <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Correo" required autofocus>
+        </div>
+
+        <div class="form-group">
+          <label for="inputEmailConfirmation" >Confirmar correo</label>
+          <input type="email" id="inputEmailConfirmation" name="inputEmailConfirmation" class="form-control" placeholder="Confirmar correo" required autofocus>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPassword" >Contraseña</label>
+          <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Contraseña" required>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+      </form>
 
     </main>
     <!-- Bootstrap core JavaScript
