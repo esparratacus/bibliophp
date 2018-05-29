@@ -1,10 +1,10 @@
 <?php
 
-include_once dirname(__FILE__) . '../User.php';
+include_once dirname(__FILE__) . '/../User.php';
 
 
 class UserMapper extends AbstractMapper {
-    protected $_entityTable = 'Users';
+    protected $_entityTable = 'User';
     protected $_entityClass = 'User';
 
     public function __construct(DatabaseAdapterInterface $adapter)
@@ -12,12 +12,12 @@ class UserMapper extends AbstractMapper {
         parent::__construct($adapter);
     }
 
-    public function insert(User $user)
+    public function insert($entity,User $user=null)
     {
         return $this->_adapter->insert($this->_entityTable, $user->toArray());
     }
 
-    public function delete($id)
+    public function delete($id,$col = 'id')
     {
         if ($id instanceof User) {
             $id = $id->id;

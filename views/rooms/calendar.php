@@ -8,7 +8,9 @@
   $rm = new RoomMapper($con,$resMapper);
   $rooms = $rm->find();
   $room = $rm->findById(1);
-  $reservations = $room->reservations;
+  $reservations = $resMapper->find();
+
+  
 ?>
 
 <!DOCTYPE html>
@@ -64,6 +66,9 @@ Esta pagina usa un calendario de bootstrap. La documentación se puede encontrar
       <div>
       <?php foreach($reservations as $r): ?>
       <p><?php echo $r->reservation_starts; ?></p>
+      <p><?php echo $r->reservation_ends; ?></p>
+      <?php $user = $r->user; ?>
+      <p><?php echo $user->load()->Email; ?></p>
       <?php endforeach;?>
       </div>
 

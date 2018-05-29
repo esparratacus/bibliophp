@@ -22,11 +22,11 @@ class Reservation extends AbstractEntity {
     }
 
     public function setUser(EntityProxy $user){
-        $this->_values['user'] = new EntityProxy($user);
+        $this->_values['user'] = $user;
     }
 
     public function setRoom(EntityProxy $room){
-        $this->_values['room'] = new EntityProxy($room);
+        $this->_values['room'] = $room;
     }
 
     function validateDate($date, $format = 'Y-m-d H:i:s')

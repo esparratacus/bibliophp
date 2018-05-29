@@ -1,20 +1,29 @@
 <?php
 include_once dirname(__FILE__) . '/AbstractMapper.php';
-//include_once dirname(__FILE__) . '/ReservationMapper.php';
+include_once dirname(__FILE__) . '/RoomMapper.php';
+include_once dirname(__FILE__) . '/UserMapper.php';
 include_once dirname(__FILE__) . '/../Reservation.php';
 
 
 class ReservationMapper extends AbstractMapper {
     protected $_reservationMapper ;
+    protected $_roomMapper;
+    protected $_userMapper;
     protected $_entityTable = 'reservations';
     protected $_entityClass = 'Reservation';
     public function __construct(DatabaseAdapterInterface $adapter)
     {
         parent::__construct($adapter);
-        
-
+        $this->_roomMapper = new RoomMapper($adapter,$this);
+        $this->_userMapper = new UserMapper($adapter);
     }
 
+    public function getRoomMapper(){
+        return $this->_roomMapper;
+    }
+    public function getUserMapper(){
+        return $this->_userMapper;
+    }
     public function delete($id,$col = 'id')
     {
         if ($id instanceof Reservation) {
@@ -30,10 +39,14 @@ class ReservationMapper extends AbstractMapper {
 
     protected function _createEntity(array $fields)
     {
-        return new Room(array(
+        return new Reservation(array(
             'id'       => $fields['id'],
-            'reservation_starts'    => $fields['reservations_starts'],
-            'reservation_ends'    => $fields['reservations_ends']
+            'reservation_starts'    => $fields['reservation_starts'],
+            'reservation_ends'    => $fields['reservation_ends'],
+            'user_id' => $fields['user_id'],
+            'room_id' => $fields['room_id'],
+            'user' => new EntityProxy($this->_userMapper,$fields['user_id']),
+            'room' => new EntityProxy($this->_roomMapper,$fields['room_id'])
         ));
     }    
 }
