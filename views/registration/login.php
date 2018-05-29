@@ -1,3 +1,30 @@
+<?php
+  include_once dirname(__FILE__) . '/../../Database/credentials.php';
+  include_once dirname(__FILE__) . '/../../Database/MysqlAdapter.php';
+  include_once dirname(__FILE__) . '/../../Model/Mapper/UserMapper.php';
+
+  $con = new MysqlAdapter(array(DB_HOST, DB_USER,DB_PASSWORD,DB_NAME));
+  $um = new UserMapper($con);
+
+  if(isset($_POST['inputEmail'])){
+    $fetch_result = $um->find("Email='" . $_POST['inputEmail'] . "'")->toArray();
+    if(empty($fetch_result)){ // Invalid email
+      echo "Correo o contraseña inválidos"; // Fix
+    } else {
+      $user = $fetch_result[0];
+      if(password_verify($_POST['inputPassword'], $user->password)){
+        session_start();
+        $_SESSION['current_user'] = $user;
+        echo "Ok!"; // Fix
+        
+        // TODO Redirect
+      } else {
+        echo "Correo o contraseña inválidos"; // Fix
+      }
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,20 +69,23 @@
 
     <main role="main" class="container">
 
-      <form class="form-signin">
-      <h1 class="h3 mb-3 font-weight-normal">Iniciar sesión</h1>
-      <label for="inputEmail" class="sr-only">Dirección de correo</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Dirección de correo" required autofocus>
-      <label for="inputPassword" class="sr-only">Contraseña</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
-      <div class="checkbox mb-3">
-        <label>
+      <form class="form-signin" method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
+        <h1 class="h3 mb-3 font-weight-normal">Iniciar sesión</h1>
+        
+        <label for="inputEmail" class="sr-only">Dirección de correo</label>
+        <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Dirección de correo" required autofocus>
+        
+        <label for="inputPassword" class="sr-only">Contraseña</label>
+        <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Contraseña" required>
+        
+        <div class="checkbox mb-3">
+          <label>
           <input type="checkbox" value="remember-me"> Recordar usuario
-        </label>
-      </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
-    </form>
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+      </form>
 
     </main>
     <!-- Bootstrap core JavaScript
