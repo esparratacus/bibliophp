@@ -50,10 +50,10 @@
     <?php
       if(isset($_POST['inputUsername'])){
         
-        if($con->select("user", "Email='" . $_POST['inputEmail'] . "'") != 0){ //Email is already registered
+        if($con->select("User", "Email='" . $_POST['inputEmail'] . "'") != 0){ //Email is already registered
           echo "El correo ya se encuentra registrado"; // Fix
         } else { // Register the new user
-          $con->insert("user", array(
+          $con->insert("User", array(
             'FullName'=>$_POST['inputUsername'],
             'Email'=>$_POST['inputEmail'],
             'Password'=>hash_password($_POST['inputPassword']),

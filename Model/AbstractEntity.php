@@ -1,6 +1,7 @@
 <?php
 
-
+include_once dirname(__FILE__) . '/CollectionProxy.php';
+include_once dirname(__FILE__) . '/EntityProxy.php';
 
 abstract class AbstractEntity {
     protected $_values = array();

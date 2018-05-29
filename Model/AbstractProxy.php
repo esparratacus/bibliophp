@@ -1,6 +1,6 @@
 <?php
 
-include_once dirname(__FILE__) . './Mapper/AbstractMapper.php';
+include_once dirname(__FILE__) . '/Mapper/AbstractMapper.php';
 abstract class AbstractProxy
 {
     protected $_mapper;

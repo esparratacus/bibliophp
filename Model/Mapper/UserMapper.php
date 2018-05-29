@@ -5,6 +5,7 @@ include_once dirname(__FILE__) . '../User.php';
 
 class UserMapper extends AbstractMapper {
     protected $_entityTable = 'Users';
+    protected $_entityClass = 'User';
 
     public function __construct(DatabaseAdapterInterface $adapter)
     {

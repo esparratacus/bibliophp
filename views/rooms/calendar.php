@@ -1,3 +1,16 @@
+<?php
+  include_once dirname(__FILE__) . '/../../Database/credentials.php';
+  include_once dirname(__FILE__) . '/../../Database/MysqlAdapter.php';
+  include_once dirname(__FILE__) . '/../../Model/Mapper/RoomMapper.php';
+
+  $con = new MysqlAdapter(array(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME));
+  $resMapper = new ReservationMapper($con);
+  $rm = new RoomMapper($con,$resMapper);
+  $rooms = $rm->find();
+  $room = $rm->findById(1);
+  $reservations = $room->reservations;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -47,7 +60,12 @@ Esta pagina usa un calendario de bootstrap. La documentación se puede encontrar
       </div>
     </nav>
 
-    <main role="main" class="container">
+    <main role="main" class="container" style="margin-top: 60px;">
+      <div>
+      <?php foreach($reservations as $r): ?>
+      <p><?php echo $r->reservation_starts; ?></p>
+      <?php endforeach;?>
+      </div>
 
       <div id="calendar">
 

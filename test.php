@@ -44,6 +44,13 @@ CREATE TABLE `biblioteca`.`rooms` (
 ");
 
 $con->query("
+INSERT INTO rooms (name) VALUES ('sala_a');
+INSERT INTO rooms (name) VALUES ('sala_b');
+INSERT INTO rooms (name) VALUES ('sala_c');
+INSERT INTO rooms (name) VALUES ('sala_d');
+");
+
+$con->query("
 CREATE TABLE `biblioteca`.`reservations` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `user_id` INT NULL,

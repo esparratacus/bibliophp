@@ -1,6 +1,6 @@
 <?php
-include_once dirname(__FILE__) . './AbstractProxy.php';
-include_once dirname(__FILE__) . './LoadableInterface.php';
+include_once dirname(__FILE__) . '/AbstractProxy.php';
+include_once dirname(__FILE__) . '/LoadableInterface.php';
 
 class EntityProxy extends AbstractProxy implements LoadableInterface
 {

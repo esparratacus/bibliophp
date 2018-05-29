@@ -1,8 +1,8 @@
 <?php
-include_once dirname(__FILE__) . './AbstractProxy.php';
-include_once dirname(__FILE__) . './LoadableInterface.php';
+include_once dirname(__FILE__) . '/AbstractProxy.php';
+include_once dirname(__FILE__) . '/LoadableInterface.php';
 
-class EntityProxy extends AbstractProxy implements LoadableInterface,Countable, IteratorAggregate
+class CollectionProxy extends AbstractProxy implements LoadableInterface,Countable, IteratorAggregate
 {
     protected $_collection;
    
