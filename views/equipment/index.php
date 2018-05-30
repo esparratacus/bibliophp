@@ -4,7 +4,7 @@ require_head();
 ?>
 
 <main role="main" class="container">
-    <p>NEW EVENT</p>
+    <p>EQUIPOS</p>
 </main>
 
 <?php require_foot() ?>
