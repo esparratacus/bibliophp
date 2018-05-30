@@ -1,8 +1,6 @@
 <?php
-    if(isset($_POST['action'])){
-        if($_POST['action'] === "logout"){
-            unset($_SESSION['current_user']);
-        }
+    if(isset($_POST['form_logout']) && isset($_POST['action']) == "logout"){
+        unset($_SESSION['current_user']);
         redirect("/views/registration/login.php");
     }
 ?>
@@ -59,7 +57,7 @@
         <span class="align-middle username"><?php echo $_SESSION['current_user']->username?></span>
         <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
             <input type="hidden" name="action" value="logout"/>
-            <input type="submit" class="btn btn-primary" name="action" value="Cerrar sesión"></button>
+            <input type="submit" class="btn btn-primary" name="form_logout" value="Cerrar sesión"></button>
         </form>
     <?php else:?>
         <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
