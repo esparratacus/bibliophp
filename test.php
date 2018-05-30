@@ -27,6 +27,30 @@ CREATE TABLE `biblioteca`.`books` (
     `copies` INT NOT NULL,
     PRIMARY KEY (`id`));
 ");
+$con->query("
+CREATE TABLE `biblioteca`.`loans` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `user_id` INT NOT NULL,
+    `book_id` INT NOT NULL,
+    `return_date` DATETIME NOT NULL,
+    `status` VARCHAR(45) NOT NULL,
+    `is_approved` INT NOT NULL,
+    PRIMARY KEY (`id`));
+");
+
+$con->query("
+ALTER TABLE `biblioteca`.`loans` 
+ADD CONSTRAINT `fk_user`
+  FOREIGN KEY (`user_id`)
+  REFERENCES `biblioteca`.`users` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_book`
+  FOREIGN KEY (`book_id`)
+  REFERENCES `biblioteca`.`books` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+");
 
 $con->query("
 CREATE TABLE `biblioteca`.`equipment` (
@@ -36,6 +60,29 @@ CREATE TABLE `biblioteca`.`equipment` (
     `serial_number` VARCHAR(45) NOT NULL,
     `quantity` INT NOT NULL,
     PRIMARY KEY (`id`));
+");
+
+$con->query("
+CREATE TABLE `biblioteca`.`rentals` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `user_id` INT NOT NULL,
+    `equipment_id` INT NOT NULL,
+    `return_date` DATETIME NOT NULL,
+    PRIMARY KEY (`id`));
+");
+
+$con->query("
+ALTER TABLE `biblioteca`.`rentals` 
+ADD CONSTRAINT `fk_rental_user`
+  FOREIGN KEY (`user_id`)
+  REFERENCES `biblioteca`.`users` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_rental_equipment`
+  FOREIGN KEY (`equipment_id`)
+  REFERENCES `biblioteca`.`equipment` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
 ");
 
 $con->query("
@@ -71,12 +118,12 @@ CREATE TABLE `biblioteca`.`reservations` (
 
 $con->query("
 ALTER TABLE `biblioteca`.`reservations` 
-ADD CONSTRAINT `fk_user`
+ADD CONSTRAINT `fk_reservations_user`
   FOREIGN KEY (`user_id`)
   REFERENCES `biblioteca`.`users` (`id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_room`
+ADD CONSTRAINT `fk_reservations_room`
   FOREIGN KEY (`room_id`)
   REFERENCES `biblioteca`.`rooms` (`id`)
   ON DELETE NO ACTION
@@ -95,12 +142,12 @@ CREATE TABLE `biblioteca`.`reports` (
 
 $con->query("
 ALTER TABLE `biblioteca`.`reports` 
-ADD CONSTRAINT `fk_equipment`
+ADD CONSTRAINT `fk_report_equipment`
   FOREIGN KEY (`equipment_id`)
   REFERENCES `biblioteca`.`equipment` (`id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_user_report`
+ADD CONSTRAINT `fk__report_user`
   FOREIGN KEY (`user_id`)
   REFERENCES `biblioteca`.`users` (`id`)
   ON DELETE NO ACTION

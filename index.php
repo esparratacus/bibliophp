@@ -1,3 +1,17 @@
+<?php
+include_once dirname(__FILE__) . '/Database/credentials.php';
+include_once dirname(__FILE__) . '/Database/MysqlAdapter.php';
+include_once dirname(__FILE__) . '/Model/Mapper/LoanMapper.php';
+include_once dirname(__FILE__) . '/Model/User.php';
+session_start();
+$con = new MysqlAdapter(array(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME));
+if(isset($_SESSION['current_user']) && $_SESSION['current_user']->admin ==1)
+{
+  $lm = new LoanMapper($con);
+  $loans = $lm->find("is_approved = 0 and status='pending_approval'");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -44,7 +58,7 @@
 
     <main role="main" class="container">
 
-      <p>Contenida  </p>
+      
 
     </main>
     <!-- Bootstrap core JavaScript
