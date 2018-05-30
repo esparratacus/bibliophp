@@ -7,14 +7,23 @@ if (isset($_POST['new_book'])) {
     $con->insert('books', $_POST['new_book']);
 }
 $bm = new BookMapper($con);
-$book = $bm->findById(1); // finds only one
-$books = $bm->find(); // perferms a SELECT * from books with no condition
+
+$cols_to_search = ['title', 'author', 'edition', 'copies'];
+if(isset($_REQUEST['search']) && !empty($_REQUEST['search']))
+    foreach($cols_to_search as $col)
+        $_REQUEST[$col] = $_REQUEST['search'];
+
+$search = request_vars_to_search($cols_to_search, isset($_REQUEST['search']) ? "OR" : "AND");
+$books = $bm->find($search);
 
 require_head();
 ?>
 
 <main role="main" class="container" style="margin-top: 60px;">
     <div class="row">
+
+        <?php include_once ROOT_PATH .'/views/layout/search_basic.php' ?>
+
     <div class="col-md-9">
     <table class="table">
     <thead>
@@ -26,6 +35,7 @@ require_head();
         <th scope="col">Editorial</th>
         <th scope="col">ISBN</th>
         <th scope="col">Copias disponibles</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>

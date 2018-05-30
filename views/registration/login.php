@@ -12,9 +12,7 @@ include_once ROOT_PATH . '/Model/Mapper/UserMapper.php';
       $user = $fetch_result[0];
       if(password_verify($_POST['inputPassword'], $user->password)){
         $_SESSION['current_user'] = $user;
-        echo "Ok!"; // Fix
-        
-        // TODO Redirect
+        redirect('/index.php');
       } else {
         $_GLOBALS['errors']="Correo o contraseña inválidos"; // Fix
       }
@@ -46,6 +44,10 @@ require_head('https://getbootstrap.com/docs/4.1/examples/sign-in/signin.css');
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
+        <br>
+        <div class="text-center">
+            <a href="<?php echo nav_link("/views/registration/new_user.php") ?>">Registrarse!</a>
+        </div>
         <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
     </form>
 </main>

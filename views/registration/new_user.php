@@ -18,7 +18,7 @@ include_once ROOT_PATH . '/Model/Mapper/UserMapper.php';
 
       $_SESSION['current_user'] = $user;
       
-      // TODO Redirect
+      redirect('/index.php');
     }
   }
 
@@ -56,6 +56,10 @@ include_once ROOT_PATH . '/Model/Mapper/UserMapper.php';
         </div>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
+          <br>
+          <div class="text-center">
+              <a href="<?php echo nav_link("/views/registration/login.php") ?>">Iniciar sesión!</a>
+          </div>
         <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
       </form>
 
