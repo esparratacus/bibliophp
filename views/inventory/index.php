@@ -2,12 +2,14 @@
 include_once dirname(__FILE__) . '/../../Database/credentials.php';
 include_once dirname(__FILE__) . '/../../Database/MysqlAdapter.php';
 include_once dirname(__FILE__) . '/../../Model/Mapper/BookMapper.php';
+include_once dirname(__FILE__) . '/../../Model/Mapper/UserMapper.php';
 include_once dirname(__FILE__) . '/../../Model/Mapper/EquipmentMapper.php';
+include_once dirname(__FILE__) . '/../../Model/User.php';
 
 $con = new MysqlAdapter(array(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME));
 $bm = new BookMapper($con);
 $em = new EquipmentMapper($con);
- 
+ session_start();
 if($_POST['element']!=null){ 
     if ($_POST['element'] == '2') {
         $book = new Book($_POST['new_book']);
@@ -21,6 +23,8 @@ if($_POST['element']!=null){
 // performs a SELECT * from books with no condition
 $books = $bm->find();
 $equipos = $em->find();
+$um = new UserMapper($con);
+$usuario = $um->findById(1);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,6 +63,7 @@ $equipos = $em->find();
           <li class="nav-item">
             <a class="nav-link" href="#">Libros</a>
           </li>
+
           <li class="nav-item active">
             <a class="nav-link" href="#">Inventario</a>
           </li>
@@ -68,6 +73,7 @@ $equipos = $em->find();
     
     <main role="main" class="container" style="margin-top: 60px;">
 
+        <?php if(isset($_SESSION['current_user']) && $_SESSION['current_user']->admin ==1):?>
         
             <h3>Agregar</h3>
             <form action="index.php" method="POST">
@@ -125,6 +131,7 @@ $equipos = $em->find();
 
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
+            <?php endif; ?>
         <div class="row">
         <div class="col-md-7">
         <h3>Inventario Libros</h3>

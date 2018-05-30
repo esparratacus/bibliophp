@@ -32,7 +32,7 @@ class UserMapper extends AbstractMapper {
             'username'    => $fields['username'],
             'email'  => $fields['email'],
             'password'  => $fields['password'],
-            'is_admin' => $fields['is_admin']
+            'admin' => $fields['admin']
         ));
     }    
 }

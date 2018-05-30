@@ -40,7 +40,7 @@ abstract class AbstractEntity {
         if (isset($this->_values[$name])) {
             return $this->_values[$name];  
         }
-        throw new InvalidArgumentException("The field '$name' has not been set for this entity yet.");   
+        throw new InvalidArgumentException("The field '$name' has not been set for this entity yet." . var_dump($this->_values));   
     }
 
     public function __isset($name)

@@ -10,12 +10,12 @@
     $user = new User($_POST['new_user']);
     $fetch_result = $um->find("Email='" . $user->email . "'")->toArray();
     if(!empty($fetch_result)){ // Email is already registered
-      echo "El correo ya se encuentra registrado"; // Fix
+      $_GLOBALS['errors']="El correo ya se encuentra registrado"; // Fix
     } else { //Register the new user
       $user->password = hash_password($user->password); 
       $um->insert($user, $user);
 
-      echo "Usuario creado"; // Remove
+      $_GLOBALS['success_notifications']=  "Usuario creado"; // Remove
 
       session_start();
       $_SESSION['current_user'] = $user;
@@ -74,6 +74,16 @@
 
     <main role="main" class="container" style="margin-top: 60px;">
 
+<?php if(isset($_GLOBALS['errors'])):?>
+    <div class="alert alert-danger" role="alert">
+         <?php echo $_GLOBALS['errors'];?>
+      </div>
+    <?php endif; ?>
+    <?php if(isset($_GLOBALS['success_notifications'])):?>
+    <div class="alert alert-success" role="alert">
+         <?php echo $_GLOBALS['success_notifications'];?>
+      </div>
+    <?php endif; ?>
       <form class="form-signin" method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
         <h1 class="h3 mb-3 font-weight-normal">Nuevo usuario</h1>
         <div class="form-group">

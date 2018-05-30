@@ -9,7 +9,7 @@
   if(isset($_POST['inputEmail'])){
     $fetch_result = $um->find("Email='" . $_POST['inputEmail'] . "'")->toArray();
     if(empty($fetch_result)){ // Invalid email
-      echo "Correo o contraseña inválidos"; // Fix
+      $_GLOBALS['errors']= "Correo o contraseña inválidos"; // Fix
     } else {
       $user = $fetch_result[0];
       if(password_verify($_POST['inputPassword'], $user->password)){
@@ -19,7 +19,7 @@
         
         // TODO Redirect
       } else {
-        echo "Correo o contraseña inválidos"; // Fix
+        $_GLOBALS['errors']="Correo o contraseña inválidos"; // Fix
       }
     }
   }
@@ -68,7 +68,12 @@
     </nav>
 
     <main role="main" class="container">
-
+    <?php if(isset($_GLOBALS['errors'])):?>
+    <div class="alert alert-danger" role="alert">
+         <?php echo $_GLOBALS['errors'];?>
+      </div>
+    <?php endif; ?>
+      
       <form class="form-signin" method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
         <h1 class="h3 mb-3 font-weight-normal">Iniciar sesión</h1>
         

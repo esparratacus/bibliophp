@@ -3,13 +3,21 @@
 include_once dirname(__FILE__) . '/AbstractEntity.php';
 
 class User extends AbstractEntity {
-    protected $_allowedFields = array('id', 'username', 'email','password', 'is_admin');
+    protected $_allowedFields = array('id', 'username', 'email','password', 'admin');
 
-    public function setUserName($name)
+    public function setUsername($username)
     {
-        if (!is_string($name) || strlen($name) < 2 || strlen($name) > 64) {
-            throw new InvalidArgumentException('Invalid user name.');
+        if (!is_string($username) || strlen($username) < 2 || strlen($username) > 64) {
+            throw new InvalidArgumentException('Invalid user username.');
         }
-        $this->_values['username'] = $name;
+        $this->_values['username'] = $username;
     }
+    public function setEmail($email)
+    {
+        if (!is_string($email) || strlen($email) < 2 || strlen($email) > 64) {
+            throw new InvalidArgumentException('Invalid user email.');
+        }
+        $this->_values['email'] = $email;
+    }
+    
 }

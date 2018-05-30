@@ -10,11 +10,11 @@ CREATE TABLE `biblioteca`.`users` (
     `username` VARCHAR(45) NOT NULL,
     `email` VARCHAR(60) NOT NULL,
     `password` VARCHAR(100) NOT NULL,
-    `is_admin` INT NOT NULL,
+    `admin` INT NOT NULL,
     PRIMARY KEY (`id`));
 ");
 
-$con->query("INSERT INTO users (username, email, password, is_admin) VALUES ('admin', 'admin@mail.com', '$2y$10$5Ov45Ce.Dq2PPd1APHjg3uLoMdTrhbHCmVPwYKGpRC/YfeZdZZX8O', 1);");
+$con->query("INSERT INTO users (username, email, password, admin) VALUES ('admin', 'admin@mail.com', '$2y$10$5Ov45Ce.Dq2PPd1APHjg3uLoMdTrhbHCmVPwYKGpRC/YfeZdZZX8O', 1);");
 
 $con->query("
 CREATE TABLE `biblioteca`.`books` (
