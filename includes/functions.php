@@ -48,6 +48,13 @@ function require_foot(){
     require_once ROOT_PATH.'/views/layout/foot.php';
 }
 
+function redirect($uri){
+    ob_start();
+    header('Location: '. nav_link($uri));
+    ob_end_flush();
+    die();
+}
+
 function hash_password($password){
     return password_hash($password, PASSWORD_BCRYPT);
 }
