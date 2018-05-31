@@ -5,7 +5,25 @@ include_once ROOT_PATH . '/Model/Mapper/LoanMapper.php';
 include_once ROOT_PATH . '/Model/Loan.php';
 include_once ROOT_PATH . '/Model/Book.php';
 $lm = new LoanMapper($con);
-$loans = $lm->find("status = '" .$_POST['status'] ."' and is_approved = '". $_POST['is_approved'] ."'");
+$loan = $lm->findById($_POST['id']);
+
+switch($_POST['action']) {
+    case 'approve':
+        $loan->status ='approved';
+        $loan->is_approved = 1;
+        $date =date("Y-m-d");
+        $day = 5;
+        $loan->return_date =date('Y-m-d', strtotime("+$day days"));
+        $lm->update($loan,$loan);
+        mail($loan->user->load()->email,'prestamo aprobado','Prestamo aprobado para el libro '. $loan->book->load()->title .'con entrega para '. $loan->return_date);
+        break;
+    case 'reject':
+        $loan->status ='rejected';
+        $lm->update($loan,$loan);
+        mail($loan->user->load()->email,'prestamo denegado','Prestamo denegado para el libro '. $loan->book->load()->title);
+        break;
+}
+$loans = $lm->find("status = 'pending_for_approval' and status = 0");
 ?>
 
 <?php foreach($loans as $l):?>
