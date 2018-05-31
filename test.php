@@ -88,10 +88,33 @@ ADD CONSTRAINT `fk_rental_equipment`
 $con->query("
 CREATE TABLE `biblioteca`.`events` (
     `id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(45) NOT NULL,
     `starts_at` DATETIME NOT NULL,
     `ends_at` DATETIME NOT NULL,
     `location` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`id`));
+");
+
+$con->query("
+CREATE TABLE `biblioteca`.`subscriptions` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `user_id` INT NULL,
+    `event_id` INT NULL,
+    PRIMARY KEY (`id`));
+");
+
+$con->query("
+ALTER TABLE `biblioteca`.`subscriptions` 
+ADD CONSTRAINT `fk_subscriptions_user`
+  FOREIGN KEY (`user_id`)
+  REFERENCES `biblioteca`.`users` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_subscriptions_event`
+  FOREIGN KEY (`event_id`)
+  REFERENCES `biblioteca`.`events` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
 ");
 
 $con->query("
