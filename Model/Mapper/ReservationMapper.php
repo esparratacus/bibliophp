@@ -36,6 +36,18 @@ class ReservationMapper extends AbstractMapper {
     {
         return $this->_adapter->insert($this->_entityTable, $reservation->toArray());
     }
+    public function update($entity)
+    {
+        if (!$entity instanceof $this->_entityClass) {
+            throw new InvalidArgumentException('The entity to be updated must be an instance of'  . $this->_entityClass . '.');
+        }
+        $id = $entity->id;
+        $data = $entity->toArray();
+        unset($data['id']);
+        unset($data['room']);
+        unset($data['user']);
+        return $this->_adapter->update($this->_entityTable, $data, "id = $id");
+    }
 
     protected function _createEntity(array $fields)
     {
