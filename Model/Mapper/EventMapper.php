@@ -23,6 +23,16 @@ class EventMapper extends AbstractMapper {
         $this->_adapter->delete($this->_entityTable, "id = $id");
     }
 
+    public function update($entity)
+    {
+        if (!$entity instanceof $this->_entityClass) {
+            throw new InvalidArgumentException('The entity to be updated must be an instance of'  . $this->_entityClass . '.');
+        }
+        $id = $entity->id;
+        $data = $entity->toArray();
+        return $this->_adapter->update($this->_entityTable, $data, "id = $id");
+    }
+
     protected function _createEntity(array $fields)
     {
         return new Event(array(
