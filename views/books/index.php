@@ -51,7 +51,11 @@ require_head();
         <td><?php echo $b->isbn; ?></td>
         <td id="book_<?=$b->id;?>"><?= $b->copies; ?></td>
         <td>
-            <form class="loan_request" action="<?php echo nav_link("/views/books/ajax_request_loan.php") ?>" method="post">
+<<<<<<< HEAD
+            <form class="loan_request" action="ajax_request_loan.php" method="post">
+=======
+            <form class="loan_request" action="ajax_request_loan.php" method="post">
+>>>>>>> 74d4674d71d1cfc52cefaf34a2c06d22f05bf767
             <input type="hidden" name="book_id" value="<?= $b->id?>">
             <?php if($b->copies > 0):?>
             <input type="submit" class="btn btn-primary btn-sm" value="Solicitar">
