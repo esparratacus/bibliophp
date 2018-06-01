@@ -71,7 +71,11 @@ CREATE TABLE `biblioteca`.`rentals` (
     `is_approved` INT NOT NULL,
     `user_id` INT NOT NULL,
     `equipment_id` INT NOT NULL,
+    `creation_date` DATETIME NOT NULL,
     `return_date` DATETIME NOT NULL,
+    `report_interval` VARCHAR(45) NULL,
+    `status` varchar(45) NOT NULL,
+    `is_approved` tinyint(4) NOT NULL,
     PRIMARY KEY (`id`));
 ");
 
