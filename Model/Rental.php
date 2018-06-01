@@ -3,7 +3,7 @@
 include_once dirname(__FILE__) . '/AbstractEntity.php';
 
 class Rental extends AbstractEntity {
-    protected $_allowedFields = array('id', 'user_id', 'equipment_id','return_date','status','is_approved', 'equipment');
+    protected $_allowedFields = array('id', 'user_id', 'equipment_id','creation_date','return_date','status','is_approved','report_interval', 'user','equipment');
 
 
     public function setReturnDate($return_date)

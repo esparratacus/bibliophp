@@ -1,3 +1,16 @@
+function setRentalsBehavior(){
+    $(".rental_request").each(function(){
+        $(this).submit(function(event){
+            event.preventDefault();
+            console.log('hice click');
+            var formData = $(this).serialize();
+            console.log(formData);
+            $.post($(this).attr('action'),formData,function(data,status){
+                getLoans();
+            });
+        });
+    });
+    };
 function setLoansBehavior(){
     $(".loan_request").each(function(){
         $(this).submit(function(event){
@@ -24,7 +37,19 @@ function setLoansBehavior(){
                 });
             });
         });
-        };
+};
+
+function getRentals(){
+    $.post("../admin/ajax_rentals.php",
+    {
+        status:'pending_for_approval',
+        is_approved: 0
+    }, 
+    function(data, status){
+        $('#rental_list').html(data);
+        setRentalsBehavior();
+    });
+};
 function getLoans(){
     $.post("../admin/ajax_loans.php",
     {
@@ -52,3 +77,4 @@ function getReservations(){
 
 getLoans();
 getReservations();
+getRentals();

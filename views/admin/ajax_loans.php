@@ -19,11 +19,11 @@ $loans = $lm->find("status = '" .$_POST['status'] ."' and is_approved = '". $_PO
             <input type="hidden" name="action" value="approve">
             <div class="form-group">
                 <label for="pickup_date">Inicio de préstamo</label>
-                <input type="text" readonly class="form_datetime form-control" name="pickup_date" value="<?php echo date("Y-m-d h:i");?>" required>
+                <input type="text"  class="form_datetime form-control" name="pickup_date" value="<?php echo date("Y-m-d h:i");?>" required>
             </div>
             <div class="form-group">
                 <label for="return_date">Fin de préstamo</label>
-                <input type="text" readonly class="form_datetime form-control" name="return_date" value="<?php echo date("Y-m-d h:i");?>" required>
+                <input type="text"  class="form_datetime form-control" name="return_date" value="<?php echo date("Y-m-d h:i");?>" required>
             </div>
             <input type="submit" class="btn btn-primary btn-sm" value="Aprobar">
     </form>

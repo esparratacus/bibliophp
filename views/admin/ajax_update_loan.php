@@ -19,7 +19,7 @@ switch($_POST['action']) {
     case 'reject':
         $loan->status ='rejected';
         $lm->update($loan,$loan);
-        mail($loan->user->load()->email,'prestamo denegado','Prestamo denegado para el libro '. $loan->book->load()->title);
+        //mail($loan->user->load()->email,'prestamo denegado','Prestamo denegado para el libro '. $loan->book->load()->title);
         break;
 }
 $loans = $lm->find("status = 'pending_for_approval' and status = 0");

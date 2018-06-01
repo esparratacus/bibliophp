@@ -36,6 +36,7 @@ CREATE TABLE `biblioteca`.`loans` (
     `return_date` DATETIME,
     `status` VARCHAR(45) NOT NULL,
     `is_approved` INT NOT NULL,
+    `report_interval` VARCHAR(45) NULL,
     `comment` VARCHAR(250),
     PRIMARY KEY (`id`));
 ");
