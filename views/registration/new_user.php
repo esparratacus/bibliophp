@@ -11,12 +11,10 @@ include_once ROOT_PATH . '/Model/Mapper/UserMapper.php';
     if(!empty($fetch_result)){ // Email is already registered
       $_GLOBALS['errors']="El correo ya se encuentra registrado"; // Fix
     } else { //Register the new user
-      $user->password = hash_password($user->password); 
-      $um->insert($user, $user);
+      $user->password = hash_password($user->password);
+      $user->id = $um->insert($user, $user);
 
       $_GLOBALS['success_notifications']=  "Usuario creado"; // Remove
-
-      
 
       $_SESSION['current_user'] = $user;
       
@@ -56,6 +54,8 @@ include_once ROOT_PATH . '/Model/Mapper/UserMapper.php';
           <label for="new_user[password]" >Contraseña</label>
           <input type="password" id="inputPassword" name="new_user[password]" class="form-control" placeholder="Contraseña" required>
         </div>
+
+        <input type="hidden" id="admin" name="new_user[admin]" value="0">
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
           <br>
