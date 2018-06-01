@@ -20,5 +20,6 @@ require_head();
     </div>
 </main>
 
-<?php require_foot('/js/ajax_loans.js','/js/ajax_rentals.js') ?>
+<?php require_foot('/js/ajax_loans.js','/js/ajax_rentals.js','/lib/datetimepicker/js/bootstrap-datetimepicker.js',
+    '/js/datetime.js') ?>
 

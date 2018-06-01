@@ -32,6 +32,7 @@ CREATE TABLE `biblioteca`.`loans` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `user_id` INT NOT NULL,
     `book_id` INT NOT NULL,
+    `pickup_date` DATETIME,
     `return_date` DATETIME,
     `status` VARCHAR(45) NOT NULL,
     `is_approved` INT NOT NULL,

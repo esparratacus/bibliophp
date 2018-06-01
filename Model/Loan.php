@@ -3,7 +3,7 @@
 include_once dirname(__FILE__) . '/AbstractEntity.php';
 
 class Loan extends AbstractEntity {
-    protected $_allowedFields = array('id', 'user_id', 'book_id','return_date','is_approved','status', 'book','user');
+    protected $_allowedFields = array('id', 'user_id', 'book_id','pickup_date','return_date','is_approved','status', 'book','user');
 
     public function setStatus($status)
     {
@@ -15,6 +15,14 @@ class Loan extends AbstractEntity {
             throw new InvalidArgumentException('The return date of the loan is invalid.');
         }
         $this->_values['return_date'] = date("Y-m-d", strtotime($return_date));
+    }
+
+    public function setPickupDate($return_date)
+    {
+        if ($this->validateDate($return_date)) {
+            throw new InvalidArgumentException('The pickup date of the loan is invalid.');
+        }
+        $this->_values['pickup_date'] = date("Y-m-d", strtotime($return_date));
     }
 
     public function setUser(EntityProxy $user){

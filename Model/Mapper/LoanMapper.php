@@ -60,6 +60,8 @@ class LoanMapper extends AbstractMapper {
             'user_id'  => $fields['user_id'],
             'status' => $fields['status'],
             'is_approved' => $fields['is_approved'],
+            'return_date' => $fields['return_date'],
+            'pickup_date' => $fields['pickup_date'],
             'user'  => new EntityProxy($this->_userMapper,$fields['user_id']),
             'book'  => new EntityProxy($this->_bookMapper,$fields['book_id'])
         ));
