@@ -13,7 +13,7 @@ switch($_POST['action']) {
        $rental->is_approved = 1;
        $rental->creation_date = $_POST['creation_date'];
        $rental->return_date = $_POST['return_date'];
-       $rental->report_interval = $_POST['report_every'] . $_POST['time_unit'];
+       $rental->report_interval = $_POST['report_every'] ." ". $_POST['time_unit'];
         $rm->update($rental,$rental);
         //mail($rental->user->load()->email,'prestamo aprobado','Prestamo aprobado para el equipo '.$rental->equipment->load()->name .'con entrega para '.$rental->return_date);
         break;
