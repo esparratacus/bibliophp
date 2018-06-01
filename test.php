@@ -164,6 +164,7 @@ ADD CONSTRAINT `fk_reservations_room`
 $con->query("
 CREATE TABLE `biblioteca`.`reports` (
     `id` INT NOT NULL AUTO_INCREMENT,
+    `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `state` VARCHAR(45) NOT NULL,
     `comments` VARCHAR(512) NULL,
     `equipment_id` INT NULL,

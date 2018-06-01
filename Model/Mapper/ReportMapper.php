@@ -47,6 +47,7 @@ class ReportMapper extends AbstractMapper {
             'comments'  => $fields['comments'],
             'equipment_id'  => $fields['equipment_id'],
             'user_id' => $fields['user_id'],
+            'date' => $fields['date'],
         ));
     }    
 }

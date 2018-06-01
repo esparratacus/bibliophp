@@ -47,6 +47,7 @@ if(isset($_POST['select_user']) && isset($_POST['user_id'])){
         $msj = ['status' => 'success', 'msj' => 'Reporte creado exitosamente'];
     }
 }
+
 if(!$user)
     $users = $um->getVisitors();
 
