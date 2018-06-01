@@ -51,9 +51,14 @@
             <li class="nav-item <?php echo menu_item_active("/views/books/index.php") ?>">
                 <a class="nav-link" href="<?php echo nav_link("/views/books/index.php") ?>">Libros</a>
             </li>
-            <li class="nav-item <?php echo menu_item_active("/views/inventory/index.php") ?>">
-                <a class="nav-link" href="<?php echo nav_link("/views/inventory/index.php") ?>">Inventario</a>
-            </li>
+            <?php if(isAdmin()): ?>
+                <li class="nav-item <?php echo menu_item_active("/views/inventory/index.php") ?>">
+                    <a class="nav-link" href="<?php echo nav_link("/views/inventory/index.php") ?>">Inventario</a>
+                </li>
+                <li class="nav-item <?php echo menu_item_active("/views/admin/resultado_reporte.php") ?>">
+                    <a class="nav-link" href="<?php echo nav_link("/views/admin/resultado_reporte.php") ?>">Resultado reporte</a>
+                </li>
+            <?php endif ?>
         </ul>
     </div>
     <?php if(isset($_SESSION['current_user'])):?>

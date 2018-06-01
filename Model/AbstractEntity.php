@@ -35,7 +35,7 @@ abstract class AbstractEntity {
         }
         $accessor = "get" . ucfirst($name);
         if (method_exists($this, $accessor) && is_callable(array($this, $accessor))) {
-            return $this->$accessor;   
+            return $this->$accessor();
         }
         if (isset($this->_values[$name])) {
             return $this->_values[$name];  

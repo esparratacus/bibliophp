@@ -25,6 +25,10 @@ class UserMapper extends AbstractMapper {
         $this->_adapter->delete($this->_entityTable, "id = $id");
     }
 
+    public function getVisitors() {
+        return $this->find('admin = 0');
+    }
+
     protected function _createEntity(array $fields)
     {
         return new User(array(

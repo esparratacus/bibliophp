@@ -19,5 +19,10 @@ class User extends AbstractEntity {
         }
         $this->_values['email'] = $email;
     }
+
+    public function getAdmin()
+    {
+        return isset($this->_values['admin']) ? $this->_values['admin'] : 0;
+    }
     
 }
