@@ -3,6 +3,7 @@ require_once 'constants.php';
 require_once 'functions.php';
 
 include_once ROOT_PATH . '/Model/User.php';
+include_once ROOT_PATH . '/Model/Event.php';
 session_start();
 
 include_once ROOT_PATH . '/Database/credentials.php';

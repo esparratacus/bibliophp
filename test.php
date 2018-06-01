@@ -32,9 +32,10 @@ CREATE TABLE `biblioteca`.`loans` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `user_id` INT NOT NULL,
     `book_id` INT NOT NULL,
-    `return_date` DATETIME NOT NULL,
+    `return_date` DATETIME,
     `status` VARCHAR(45) NOT NULL,
     `is_approved` INT NOT NULL,
+    `comment` VARCHAR(250),
     PRIMARY KEY (`id`));
 ");
 
@@ -88,10 +89,34 @@ ADD CONSTRAINT `fk_rental_equipment`
 $con->query("
 CREATE TABLE `biblioteca`.`events` (
     `id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(45) NOT NULL,
     `starts_at` DATETIME NOT NULL,
     `ends_at` DATETIME NOT NULL,
     `location` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`id`));
+");
+
+$con->query("
+CREATE TABLE `biblioteca`.`subscriptions` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `user_id` INT NULL,
+    `event_id` INT NULL,
+    `subscription_email` VARCHAR(60) NOT NULL,
+    PRIMARY KEY (`id`));
+");
+
+$con->query("
+ALTER TABLE `biblioteca`.`subscriptions` 
+ADD CONSTRAINT `fk_subscriptions_user`
+  FOREIGN KEY (`user_id`)
+  REFERENCES `biblioteca`.`users` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION,
+ADD CONSTRAINT `fk_subscriptions_event`
+  FOREIGN KEY (`event_id`)
+  REFERENCES `biblioteca`.`events` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
 ");
 
 $con->query("

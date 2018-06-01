@@ -27,6 +27,7 @@ $usuario = $um->findById(1);
 
 require_head();
 ?>
+
 <main role="main" class="container">
 
     <?php if(isset($_SESSION['current_user']) && $_SESSION['current_user']->admin ==1):?>

@@ -18,9 +18,18 @@ class LoanMapper extends AbstractMapper {
         $this->_bookMapper = new BookMapper($adapter);
     }
 
-    public function insert($entity,User $user=null)
+    public function getBookMapper(){
+        return $this->_bookMapper;
+    }
+
+    public function getUserMapper(){
+        return $this->_userMapper;
+    }
+
+
+    public function insert($entity,Loan $loan=null)
     {
-        return $this->_adapter->insert($this->_entityTable, $user->toArray());
+        return $this->_adapter->insert($this->_entityTable, $loan->toArray());
     }
 
     public function delete($id,$col = 'id')
@@ -29,6 +38,18 @@ class LoanMapper extends AbstractMapper {
             $id = $id->id;
         }
         $this->_adapter->delete($this->_entityTable, "id = $id");
+    }
+    public function update($entity)
+    {
+        if (!$entity instanceof $this->_entityClass) {
+            throw new InvalidArgumentException('The entity to be updated must be an instance of'  . $this->_entityClass . '.');
+        }
+        $id = $entity->id;
+        $data = $entity->toArray();
+        unset($data['id']);
+        unset($data['user']);
+        unset($data['book']);
+        return $this->_adapter->update($this->_entityTable, $data, "id = $id");
     }
 
     protected function _createEntity(array $fields)

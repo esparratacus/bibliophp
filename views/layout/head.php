@@ -3,6 +3,9 @@
         unset($_SESSION['current_user']);
         redirect("/views/registration/login.php");
     }
+    if(isset($_POST['form_login']) && isset($_POST['action']) == "login"){
+        redirect("/views/registration/login.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +40,7 @@
                 <a class="nav-link" href="<?php echo nav_link("/index.php") ?>">Inicio</a>
             </li>
             <li class="nav-item <?php echo menu_item_active("/views/events/show_event.php") ?>">
-                <a class="nav-link" href="<?php echo nav_link("/views/events/show_event.php")  ?>">Eventos</a>
+                <a class="nav-link" href="<?php echo nav_link("/views/events/index.php")  ?>">Eventos</a>
             </li>
             <li class="nav-item <?php echo menu_item_active("/views/rooms/calendar.php") ?>">
                 <a class="nav-link" href="<?php echo nav_link("/views/rooms/calendar.php") ?>" >Salas</a>
@@ -62,7 +65,7 @@
     <?php else:?>
         <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
             <input type="hidden" name="action" value="login"/>
-            <input type="submit" class="btn btn-primary" name="action" value="Iniciar sesión"></button>
+            <input type="submit" class="btn btn-primary" name="form_login" value="Iniciar sesión"></button>
         </form>
     <?php endif?>
     

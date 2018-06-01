@@ -20,12 +20,14 @@ require_head();
 ?>
 
 <main role="main" class="container" style="margin-top: 60px;">
+    <div id="messages">
+    </div>
     <div class="row">
 
-        <?php include_once ROOT_PATH .'/views/layout/search_basic.php' ?>
+    <?php include_once ROOT_PATH .'/views/layout/search_basic.php' ?>
 
-    <div class="col-md-9">
-    <table class="table">
+    
+    <table class="table table-sm">
     <thead>
         <tr>
         <th scope="col">#</th>
@@ -35,7 +37,7 @@ require_head();
         <th scope="col">Editorial</th>
         <th scope="col">ISBN</th>
         <th scope="col">Copias disponibles</th>
-            <th></th>
+        <th scope="col"> acciones </th>
         </tr>
     </thead>
     <tbody>
@@ -47,71 +49,23 @@ require_head();
         <td><?php echo $b->edition; ?></td>
         <td><?php echo $b->publisher; ?></td>
         <td><?php echo $b->isbn; ?></td>
-        <td><?php echo $b->copies; ?></td>
+        <td id="book_<?=$b->id;?>"><?= $b->copies; ?></td>
+        <td>
+            <form class="loan_request" action="/biblioteca/views/books/ajax_request_loan.php" method="post">
+            <input type="hidden" name="book_id" value="<?= $b->id?>">
+            <?php if($b->copies > 0):?>
+            <input type="submit" class="btn btn-primary btn-sm" value="Solicitar">
+            <?php else:?>
+            <input type="submit" class="btn btn-primary btn-sm" value="Solicitar" disabled>
+            <?php endif?>
+            </form>
+        </td>
         </tr>
         <?php endforeach;?>
     </tbody>
 </table>
     </div>
-    <div class="col-md-3">
-        <form action="index.php" method="POST" novalidate>
-            <div class="form-group">
-                <label for="element">Elija una opción</label>
-                <select id="kind" class="form-control" name ="element" placeholder="s" required>
-                    <option value="1">Equipo</option>
-                    <option value="2">Libro</option>
-                </select>
-            </div>
-            <div id="equipment_form">
-                <div class="form-group">
-                    <label for="new_equipment['name']">Título</label>
-                    <input type="text" class="form-control" name="new_equipment['name']" required>
-                </div>
-                <div class="form-group">
-                    <label for="new_equipment['maker']">Título</label>
-                    <input type="text" class="form-control" name="new_equipment['maker']" required>
-                </div>
-                <div class="form-group">
-                    <label for="new_equipment['serial_number']">Título</label>
-                    <input type="text" class="form-control" name="new_equipment['serial_number']" required>
-                </div>
-                <div class="form-group">
-                    <label for="new_equipment['quantity']">Título</label>
-                    <input type="text" class="form-control" name="new_equipment['quantity']" required>
-                </div>
-            </div>
-            <div id="book_form">
-                <div class="form-group">
-                    <label for="new_book['title']">Título</label>
-                    <input type="text" class="form-control" name="new_book['title']" required>
-                </div>
-                <div class="form-group">
-                    <label for="new_book['author']">Autor</label>
-                    <input type="text" class="form-control" name="new_book['author']" required>
-                </div>
-                <div class="form-group">
-                    <label for="new_book['edition']">Edición</label>
-                    <input type="text" class="form-control" name="new_book['edition']" required>
-                </div>
-                <div class="form-group">
-                    <label for="new_book['publisher']">Editorial</label>
-                    <input type="text" class="form-control" name="new_book['publisher']" required>
-                </div>
-                <div class="form-group">
-                    <label for="new_book['isbn']">ISBN</label>
-                    <input type="text" class="form-control" name="new_book['isbn']" required>
-                </div>
-                <div class="form-group">
-                    <label for="new_book['copies']"># copias</label>
-                    <input type="number" class="form-control" name="new_book['copies']" required>
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Guardar</button>
-        </form>
-    </div>
-    </div>
-
+    
 </main>
 
-<?php require_foot('/js/books.js') ?>
+<?php require_foot('/js/books.js','/js/ajax_request_loan.js') ?>
