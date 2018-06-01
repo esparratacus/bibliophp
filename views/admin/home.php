@@ -6,7 +6,8 @@ $lm = new LoanMapper($con);
 $loans = $lm->find("'status' = 'pending_aproval' and 'is_approved' = 0");
 
 
-require_head();
+require_head('/lib/fullCalendar/fullcalendar.min.css','/lib/datetimepicker/css/bootstrap-datetimepicker.min.css');
+
 ?>
 <main role="main" class="container">
     <h3>Solicitudes pendientes</h3>
