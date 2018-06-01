@@ -9,6 +9,7 @@ $loans = $lm->find("'status' = 'pending_aproval' and 'is_approved' = 0");
 require_head();
 ?>
 <main role="main" class="container">
+    <h3>Solicitudes pendientes</h3>
     <div class="row">
         <div id="loan_list" class="col-md-4">
         </div>

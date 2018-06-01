@@ -26,7 +26,7 @@ function setLoansBehavior(){
         });
         };
 function getLoans(){
-    $.post("/biblioteca/views/admin/ajax_loans.php",
+    $.post("../admin/ajax_loans.php",
     {
         status:'pending_for_approval',
         is_approved: 0
@@ -39,7 +39,7 @@ function getLoans(){
 
 
 function getReservations(){
-    $.post("/biblioteca/views/admin/ajax_reservations.php",
+    $.post("../admin/ajax_reservations.php",
     {
         status:'pending_for_approval',
         is_approved: 0

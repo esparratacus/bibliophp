@@ -28,12 +28,12 @@ $reservations = $rm->find("status = 'pending_for_approval' and status = 0");
     <h5 class="card-title"><?=$r->user->load()->username?></h5>
     <h6 class="card-subtitle mb-2 text-muted"><?=$r->room->load()->name?></h6>
     <p class="card-text">reserva de sala.</p>
-    <form class="loan_request" action="/biblioteca/views/admin/ajax_update_reservation.php" method="post">
+    <form class="loan_request" action="ajax_update_reservation.php" method="post">
             <input type="hidden" name="id" value="<?= $r->id?>">
             <input type="hidden" name="action" value="approve">
             <input type="submit" class="btn btn-primary btn-sm" value="Aprobar">
     </form>
-    <form class="loan_request" action="/biblioteca/views/admin/ajax_update_reservation.php" method="post">
+    <form class="loan_request" action="ajax_update_reservation.php" method="post">
             <input type="hidden" name="id" value="<?= $r->id?>">
             <input type="hidden" name="action" value="reject">
             <input type="submit" class="btn btn-danger btn-sm" value="Rechazar">
