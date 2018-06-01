@@ -40,6 +40,10 @@ class RentalMapper extends AbstractMapper {
     {
         return $this->find("user_id = '$user_id' AND status = 'approved'");
     }
+    public function findApproved()
+    {
+        return $this->find("status = 'approved'");
+    }
 
     public function update($entity)
     {
@@ -62,7 +66,9 @@ class RentalMapper extends AbstractMapper {
             'user'  => new EntityProxy($this->_userMapper,$fields['user_id']),
             'equipment'  => new EntityProxy($this->_equipmentMapper,$fields['equipment_id']),
             'status' => $fields['status'],
-            'is_approved' => $fields['is_approved']
+            'is_approved' => $fields['is_approved'],
+            'creation_date' => $fields['creation_date'],
+            'report_interval' => $fields['report_interval'],
         ));
     }    
 }

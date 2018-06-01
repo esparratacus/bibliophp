@@ -1,4 +1,6 @@
 <?php
+include_once ROOT_PATH . '/Model/Mapper/RentalMapper.php';
+include_once ROOT_PATH . '/Model/Mapper/ReportMapper.php';
 
 function current_uri(){
     return "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -98,3 +100,4 @@ function isVisitor() {
 function isAdmin() {
     return isset($_SESSION['current_user']) && $_SESSION['current_user']->admin;
 }
+

@@ -24,7 +24,7 @@
 
 <main role="main" class="container">
 	<?php if(isset($_SESSION['current_user']) && $_SESSION['current_user']->admin):?>
-		<h3>Agregar</h3>
+		<h3>Editar</h3>
 		<form action="edit.php" method="POST">
 				<div class="form-group">
 						<label for="new_event[name]">Nombre</label>

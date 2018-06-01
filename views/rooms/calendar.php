@@ -24,17 +24,20 @@ if(isset($_SESSION['error'])){
   }
 
   if(isset($_POST['new_reservation'])){
-      $reservation = new Reservation($_POST['new_reservation']);
-      $reservation->setIsApproved(0);
-      $reservation->setStatus('pending_for_approval');
-      $result = $resMapper->insert($reservation,$reservation);
-      if($result !==null){
-          $_SESSION['success']='Reservación de sala solicitada exitosamente';
-      }
-      else{
-        $_SESSION['error']='Reservación fallida. Contacte a un administrador';
-      }
+    $reservation = new Reservation($_POST['new_reservation']);
+    $reservation->setIsApproved(0);
+    $reservation->setStatus('pending_for_approval');
+    $result = $resMapper->insert($reservation,$reservation);
+    if($result !==null){
+        $_SESSION['success']='Reservación de sala solicitada exitosamente';
+    }
+    else{
+    $_SESSION['error']='Reservación fallida. Contacte a un administrador';
+    }
+  }
 
+  if(isset($_POST['new_room'])){
+    $room = new Room($_POST['new_room']);
   }
    
 
@@ -44,35 +47,40 @@ if(isset($_SESSION['error'])){
 
 <main role="main" class="container" style="margin-top: 60px;">
     <?php if(isset($_SESSION['error'])): ?>
-    <div class="alert alert-danger">
-        <?= $_SESSION['error'];?>
-    </div>
+        <div class="alert alert-danger">
+            <?= $_SESSION['error'];?>
+        </div>
     <?php endif;?>
     <?php if(isset($_SESSION['success'])): ?>
-    <div class="alert alert-success">
-        <?= $_SESSION['success'];?>
-    </div>
+        <div class="alert alert-success">
+            <?= $_SESSION['success'];?>
+        </div>
     <?php endif;?>
+
     <div class="row">
-    <div  id="calendar">
+    <a class="nav-link" href="<?php echo nav_link("/views/rooms/index.php") ?>">Lista de salas</a>
     </div>
+
+    <div class="row">
+        <h3>Asignación de salas</h3>
+        <div  id="calendar">
+        </div>
     </div>
     
-
-<div class="row">
-<h3>Solicitud de reserva</h3>
-</div>
-<div class="row">
-    <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
-    <div class="form-group">
-        <input type="hidden" name="new_reservation[user_id]" value="<?=$_SESSION['current_user']->id?>">
-        <label for="new_reservation[room_id]">sala</label>
-        <select  class="custom-select" name="new_reservation[room_id]"  required>
-            <?php foreach($rooms as $r): ?>
-            <option value="<?= $r->id ?>"><?= $r->name?></option>
-            <?php endforeach?> 
-        </select>
-        </div>
+    <div class="row">
+        <h3>Solicitud de reserva</h3>
+    </div>
+    <div class="row">
+        <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+            <div class="form-group">
+                <input type="hidden" name="new_reservation[user_id]" value="<?=$_SESSION['current_user']->id?>">
+                <label for="new_reservation[room_id]">sala</label>
+                <select  class="custom-select" name="new_reservation[room_id]"  required>
+                    <?php foreach($rooms as $r): ?>
+                        <option value="<?= $r->id ?>"><?= $r->name?></option>
+                    <?php endforeach?> 
+                </select>
+            </div>
             <div class="form-group">
                 <label for="new_reservation[reservation_starts]">Inicio de reserva</label>
                 <input type="text" readonly class="form_datetime form-control" name="new_reservation[reservation_starts]" value="<?php echo date("Y-m-d h:i");?>" required>
@@ -82,8 +90,8 @@ if(isset($_SESSION['error'])){
                 <input type="text" readonly class="form_datetime form-control" name="new_reservation[reservation_ends]" value="<?php echo date("Y-m-d h:i");?>" required>
             </div>
             <input type="submit" class="btn btn-primary" value="Solicitar reserva">
-    </form>
-</div>
+        </form>
+    </div>
 </main>
 
 <script>
