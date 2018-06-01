@@ -37,17 +37,6 @@ function getLoans(){
     });
 };
 
-function getLoans(){
-    $.post("/biblioteca/views/admin/ajax_reservations.php",
-    {
-        status:'pending_for_approval',
-        is_approved: 0
-    }, 
-    function(data, status){
-        $('#reservations_list').html(data);
-        setLoansBehavior();
-    });
-};
 
 function getReservations(){
     $.post("/biblioteca/views/admin/ajax_reservations.php",
