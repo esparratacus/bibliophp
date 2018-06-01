@@ -22,7 +22,6 @@ class ReportReminder
         $this->reportMapper = new ReportMapper($con);
         $this->rentalMapper = new RentalMapper($con);
         $this->userMapper = new UserMapper($con);
-        unset($_SESSION['report_reminder']);
         if(!isset($_SESSION['report_reminder']))
             $_SESSION['report_reminder'] = ['admin' => []];
 
