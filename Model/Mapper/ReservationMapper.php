@@ -34,6 +34,9 @@ class ReservationMapper extends AbstractMapper {
 
     public function insert($entity, Reservation $reservation=null)
     {
+        $data=$reservation->toArray();
+        unset($data['room']);
+        unset($data['user']);
         return $this->_adapter->insert($this->_entityTable, $reservation->toArray());
     }
     public function update($entity)
