@@ -34,6 +34,11 @@ class RentalMapper extends AbstractMapper {
         $this->_adapter->delete($this->_entityTable, "id = $id");
     }
 
+    public function findByUserApproved($user_id)
+    {
+        return $this->find("user_id = '$user_id' AND status = 'approved'");
+    }
+
     protected function _createEntity(array $fields)
     {
         return new Rental(array(
