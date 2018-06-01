@@ -3,7 +3,7 @@
 include_once dirname(__FILE__) . '/AbstractEntity.php';
 
 class Room extends AbstractEntity {
-    protected $_allowedFields = array('id', 'name','reservations');
+    protected $_allowedFields = array('id', 'name', 'capacity','reservations');
     
     public function setName($name)
     {
