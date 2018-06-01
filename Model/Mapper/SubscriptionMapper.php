@@ -14,7 +14,7 @@ class SubscriptionMapper extends AbstractMapper {
     public function __construct(DatabaseAdapterInterface $adapter)
     {
         parent::__construct($adapter);
-        $this->_roomMapper = new EventMapper($adapter);
+        $this->_eventMapper = new EventMapper($adapter);
         $this->_userMapper = new UserMapper($adapter);
     }
 

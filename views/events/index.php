@@ -67,7 +67,7 @@ require_head('/lib/datetimepicker/css/bootstrap-datetimepicker.min.css');
                             <td><a class="nav-link" href="<?php echo (nav_link("/views/events/edit.php")."?id=".$event->id); ?>">Editar</a></td>
                         <?php endif; ?>
                         <?php if(isset($_SESSION['current_user']) && !$_SESSION['current_user']->admin):?>
-                            <td><a class="nav-link" href="<?php echo (nav_link("/views/events/subscribe.php")."?id=".$event->id); ?>">Suscribirse</a></td>
+                            <td><a class="nav-link" href="<?php echo (nav_link("/views/events/subscribe.php")."?id=".$event->id); ?>">Subscribirse</a></td>
                         <?php endif; ?>
                     </tr>
                 <?php endforeach;?>
