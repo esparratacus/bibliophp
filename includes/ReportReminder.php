@@ -83,7 +83,7 @@ class ReportReminder
             //var_dump($email);
             //var_dump($subject);
             //var_dump($message);
-            mail($email, $subject, $message);
+            //mail($email, $subject, $message);
         }
     }
 
@@ -109,7 +109,7 @@ class ReportReminder
             //var_dump($email);
             //var_dump($subject);
             //var_dump($message);
-            mail($email, $subject, $message);
+            //mail($email, $subject, $message);
         }
     }
 }
