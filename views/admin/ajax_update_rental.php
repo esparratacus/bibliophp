@@ -5,7 +5,6 @@ include_once ROOT_PATH . '/Model/Mapper/RentalMapper.php';
 include_once ROOT_PATH . '/Model/Rental.php';
 include_once ROOT_PATH . '/Model/Equipment.php';
 $rm = new RentalMapper($con);
-$rentals = $rm->find("status = 'pending_for_approval' and status = 0");
 $rental =$rm->findById($_POST['id']);
 switch($_POST['action']) {
     case 'approve':
@@ -23,6 +22,7 @@ switch($_POST['action']) {
         //mail($rental->user->load()->email,'Préstamo denegado','Préstamo denegado para el libro '.$rental->equipment->load()->name );
         break;
 }
+$rentals = $rm->find("status = 'pending_for_approval' and status = 0");
 ?>
 
 <?php foreach($rentals as $r):?>
