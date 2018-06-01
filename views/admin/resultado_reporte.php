@@ -15,7 +15,7 @@ $users = [];
 $rentals = [];
 $states = ['excelente', 'bueno', 'regular', 'averiado o deteriorado', 'devuelto'];
 $msj = [];
-if(isset($_POST['select_user'])){
+if(isset($_POST['select_user']) && isset($_POST['user_id'])){
     $user = $um->findById($_POST['user_id']);
     $rentals = $rm->findByUserApproved($_POST['user_id']);
 }else if(isset($_POST['report'])){
