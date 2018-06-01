@@ -101,6 +101,7 @@ CREATE TABLE `biblioteca`.`subscriptions` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `user_id` INT NULL,
     `event_id` INT NULL,
+    `subscription_email` VARCHAR(60) NOT NULL,
     PRIMARY KEY (`id`));
 ");
 
