@@ -63,6 +63,12 @@ function hash_password($password){
     return password_hash($password, PASSWORD_BCRYPT);
 }
 
+/**
+ * prepara variables $_GET a un string para agregar a SQL query
+ * @param $request_vars
+ * @param string $conditional_separator
+ * @return string
+ */
 function request_vars_to_search($request_vars, $conditional_separator = "OR"){
     $search_conditions = [];
     foreach($request_vars as $var_name) {
@@ -79,3 +85,4 @@ function request_vars_to_search($request_vars, $conditional_separator = "OR"){
     }
     return implode(" $conditional_separator ", $search_conditions);
 }
+
