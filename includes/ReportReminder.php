@@ -83,7 +83,8 @@ class ReportReminder
             //var_dump($email);
             //var_dump($subject);
             //var_dump($message);
-            //mail($email, $subject, $message);
+            $message = wordwrap($message, 70, "\r\n");
+            mail($email, $subject, $message);
         }
     }
 
@@ -109,7 +110,8 @@ class ReportReminder
             //var_dump($email);
             //var_dump($subject);
             //var_dump($message);
-            //mail($email, $subject, $message);
+            $message = wordwrap($message, 70, "\r\n");
+            mail($email, $subject, $message);
         }
     }
 }
