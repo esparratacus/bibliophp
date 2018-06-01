@@ -137,6 +137,8 @@ CREATE TABLE `biblioteca`.`reservations` (
     `room_id` INT NULL,
     `reservation_starts` DATETIME NULL,
     `reservation_ends` DATETIME NULL,
+    `status` VARCHAR(45) NOT NULL,
+    `is_approved` INT NOT NULL,
     PRIMARY KEY (`id`));
 ");
 

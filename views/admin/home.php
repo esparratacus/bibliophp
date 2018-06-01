@@ -10,9 +10,12 @@ require_head();
 ?>
 <main role="main" class="container">
     <div class="row">
-        <div id="loan_list" class="col-md-6">
+        <div id="loan_list" class="col-md-4">
         </div>
-        <div id="rental_list" class="col-md-6"></div>
+        <div id="rental_list" class="col-md-4">
+        </div>
+        <div id="reservations_list" class="col-md-4">
+        </div>
     </div>
 </main>
 
