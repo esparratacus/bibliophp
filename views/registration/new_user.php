@@ -16,6 +16,8 @@ include_once ROOT_PATH . '/Model/Mapper/UserMapper.php';
 
       $_GLOBALS['success_notifications']=  "Usuario creado"; // Remove
 
+      
+
       $_SESSION['current_user'] = $user;
       
       redirect('/index.php');
