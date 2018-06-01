@@ -14,7 +14,7 @@ $rentals = $rm->find("status = '" .$_POST['status'] ."' and is_approved = '". $_
     <h5 class="card-title"><?=$r->user->load()->username?></h5>
     <h6 class="card-subtitle mb-2 text-muted"><?=$r->equipment->load()->name?></h6>
     <p class="card-text">Solicitud de préstamo</p>
-    <form class="loan_request" action="ajax_update_rental.php" method="post">
+    <form class="rental_request" action="ajax_update_rental.php" method="post">
             <input type="hidden" name="id" value="<?= $r->id?>">
             <input type="hidden" name="action" value="approve">
             <div class="form-group">
@@ -39,7 +39,7 @@ $rentals = $rm->find("status = '" .$_POST['status'] ."' and is_approved = '". $_
             </div>
             <input type="submit" class="btn btn-primary btn-sm" value="Aprobar">
     </form>
-    <form class="loan_request" action="ajax_update_rental.php" method="post">
+    <form class="rental_request" action="ajax_update_rental.php" method="post">
             <input type="hidden" name="id" value="<?= $r->id?>">
             <input type="hidden" name="action" value="reject">
             <input type="submit" class="btn btn-danger btn-sm" value="Rechazar">
