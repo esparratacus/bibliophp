@@ -6,7 +6,7 @@ function setRentalsBehavior(){
             var formData = $(this).serialize();
             console.log(formData);
             $.post($(this).attr('action'),formData,function(data,status){
-                getLoans();
+                getRentals();
             });
         });
     });
