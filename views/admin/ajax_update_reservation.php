@@ -11,12 +11,12 @@ switch($_POST['action']) {
         $reservation->is_approved = 1;
         
         $rm->update($reservation,$reservation);
-        //mail($reservation->user->load()->email,'prestamo aprobado','Prestamo aprobado para el libro '. $reservation->book->load()->title .'con entrega para '. $reservation->return_date);
+        mail($reservation->user->load()->email,'prestamo aprobado','Prestamo aprobado para el libro '. $reservation->book->load()->title .'con entrega para '. $reservation->return_date);
         break;
     case 'reject':
         $reservation->status ='rejected';
         $rm->update($reservation,$reservation);
-        //mail($reservation->user->load()->email,'prestamo denegado','Prestamo denegado para el libro '. $reservation->book->load()->title);
+        mail($reservation->user->load()->email,'prestamo denegado','Prestamo denegado para el libro '. $reservation->book->load()->title);
         break;
 }
 $reservations = $rm->find("status = 'pending_for_approval' and status = 0");

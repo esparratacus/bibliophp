@@ -14,12 +14,12 @@ switch($_POST['action']) {
        $rental->return_date = $_POST['return_date'];
        $rental->report_interval = $_POST['report_every'] ." ". $_POST['time_unit'];
         $rm->update($rental,$rental);
-        //mail($rental->user->load()->email,'prestamo aprobado','Prestamo aprobado para el equipo '.$rental->equipment->load()->name .'con entrega para '.$rental->return_date);
+        mail($rental->user->load()->email,'prestamo aprobado','Prestamo aprobado para el equipo '.$rental->equipment->load()->name .'con entrega para '.$rental->return_date);
         break;
     case 'reject':
        $rental->status ='rejected';
         $rm->update($rental,$rental);
-        //mail($rental->user->load()->email,'Préstamo denegado','Préstamo denegado para el libro '.$rental->equipment->load()->name );
+        mail($rental->user->load()->email,'Préstamo denegado','Préstamo denegado para el libro '.$rental->equipment->load()->name );
         break;
 }
 $rentals = $rm->find("status = 'pending_for_approval' and status = 0");

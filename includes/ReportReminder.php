@@ -22,6 +22,7 @@ class ReportReminder
         $this->reportMapper = new ReportMapper($con);
         $this->rentalMapper = new RentalMapper($con);
         $this->userMapper = new UserMapper($con);
+       
         if(!isset($_SESSION['report_reminder']))
             $_SESSION['report_reminder'] = ['admin' => []];
 
@@ -35,7 +36,7 @@ class ReportReminder
             case "MONTH" : $interval_spec = "P$interval[0]M"; break;
             case "DAY" : $interval_spec = "P$interval[0]D"; break;
             case "HOUR" : $interval_spec = "PT$interval[0]H"; break;
-            case "MINUTE" : $interval_spec = "PT$interval[0]M"; break;
+            case "MINUTES" : $interval_spec = "PT$interval[0]M"; break;
         }
         return new DateInterval($interval_spec);
     }
@@ -70,11 +71,14 @@ class ReportReminder
             $send_mail = true;
         }else{
             $session_date = new DateTime($_SESSION['report_reminder'][$user->id][$rental->id]);
+            //var_dump($session_date);
+            //var_dump($dateend);
             if($session_date < $dateend){
                 $_SESSION['report_reminder'][$user->id][$rental->id] = $date;
                 $send_mail = true;
             }
         }
+        
         if($send_mail){
             $email = $user->email;
             $subject = "Recordatorio presentarse evaluación de equipo";

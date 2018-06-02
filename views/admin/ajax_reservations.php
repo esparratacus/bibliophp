@@ -11,7 +11,8 @@ $reservations = $rm->find("status = '" .$_POST['status'] ."' and is_approved = '
   <div class="card-body">
     <h5 class="card-title"><?=$r->user->load()->username?></h5>
     <h6 class="card-subtitle mb-2 text-muted"><?=$r->room->load()->name?></h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <p class="card-text">Reserva de sala</p>
+    <p><?=$r->reservation_starts?></p>
     <form class="reservation_request" action="ajax_update_reservation.php" method="post">
             <input type="hidden" name="id" value="<?= $r->id?>">
             <input type="hidden" name="action" value="approve">

@@ -82,6 +82,10 @@ function request_vars_to_search($request_vars, $conditional_separator = "OR"){
                 $_REQUEST[$var_name] = str_replace($operator, '', $_REQUEST[$var_name]);
                 $value = $_REQUEST[$var_name];
             }
+            if($operator == '='){
+                $operator = 'LIKE';
+                $value = '"%'.$_REQUEST[$var_name].'%"';
+            }
             $search_conditions[] = "$var_name $operator $value";
         }
     }

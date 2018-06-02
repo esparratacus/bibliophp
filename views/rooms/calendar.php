@@ -67,6 +67,10 @@ if(isset($_SESSION['error'])){
         </div>
     </div>
     
+    
+
+    <?php if(isVisitor()):?>
+    <br>
     <div class="row">
         <h3>Solicitud de reserva</h3>
     </div>
@@ -92,6 +96,7 @@ if(isset($_SESSION['error'])){
             <input type="submit" class="btn btn-primary" value="Solicitar reserva">
         </form>
     </div>
+<?php endif;?>
 </main>
 
 <script>
